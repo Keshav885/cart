@@ -1,0 +1,10 @@
+.card-footer{
+  padding: 0;
+  border: none;
+}
+
+.card-footer a{
+  border-top: none;
+  border-radius: 0px 0px 3px 3px;
+  width: 100%;
+}
