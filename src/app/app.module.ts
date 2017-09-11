@@ -6,7 +6,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from "@angular/forms";
+import { FormsModule } from '@angular/forms';
 import { DataTableModule } from 'angular-4-data-table';
 
 
@@ -21,14 +21,16 @@ import { MyOrdersComponent } from './components/my-orders/my-orders.component';
 import { AdminProductsComponent } from './components/admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './components/Admin/admin-orders/admin-orders.component';
 import { LoginComponent } from './components/login/login.component';
-import {AuthService} from './services/auth.service';
-import {AuthGaurd} from './services/auth-gaurd.service';
-import {UserService} from "./services/user.service";
-import { ProductFormComponent } from './components/admin/product-form/product-form.component';
-import {CategoryService} from "./services/category.service";
-import {ProductService} from "./services/product.service";
 import { ProductsFilterComponent } from './components/products/product-filter/products-filter.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
+import {AuthService} from './services/auth.service';
+import {AuthGaurd} from './services/auth-gaurd.service';
+import {UserService} from './services/user.service';
+import { ProductFormComponent } from './components/admin/product-form/product-form.component';
+import {CategoryService} from './services/category.service';
+import {ProductService} from './services/product.service';
+import { ShoppingCartService } from './services/shopping-cart.service';
+import { CartItemsComponent } from './components/cart-items/cart-items.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,8 @@ import { ProductCardComponent } from './components/product-card/product-card.com
     LoginComponent,
     ProductFormComponent,
     ProductsFilterComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    CartItemsComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +63,7 @@ import { ProductCardComponent } from './components/product-card/product-card.com
       {path: '', component: ProductsComponent},
       {path: 'products', component: ProductsComponent},
       {path: 'login', component: LoginComponent},
-      {path: 'shopping-cart', component: ShoppingCartComponent},
+      {path: 'shopping-carts', component: ShoppingCartComponent},
 
       {path: 'check-out', component: CheckOutComponent, canActivate:[AuthGaurd]},
       {path: 'order/success', component: OrderSuccessComponent, canActivate:[AuthGaurd]},
@@ -77,7 +80,8 @@ import { ProductCardComponent } from './components/product-card/product-card.com
     AuthGaurd,
     UserService,
     CategoryService,
-    ProductService
+    ProductService,
+    ShoppingCartService
   ],
   bootstrap: [AppComponent]
 })

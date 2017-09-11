@@ -14,7 +14,7 @@ export class BsNavbarComponent{
   constructor(public auth: AuthService) {
   }
 
-  viewMode;
+  viewMode = 'home';
 
   logOut() {
     this.auth.logOut();
