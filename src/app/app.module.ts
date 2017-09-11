@@ -21,7 +21,7 @@ import { MyOrdersComponent } from './components/my-orders/my-orders.component';
 import { AdminProductsComponent } from './components/admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './components/Admin/admin-orders/admin-orders.component';
 import { LoginComponent } from './components/login/login.component';
-import { ProductsFilterComponent } from './components/products/product-filter/products-filter.component';
+import { ProductFilterComponent } from './components/products/product-filter/product-filter.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import {AuthService} from './services/auth.service';
 import {AuthGaurd} from './services/auth-gaurd.service';
@@ -31,6 +31,7 @@ import {CategoryService} from './services/category.service';
 import {ProductService} from './services/product.service';
 import { ShoppingCartService } from './services/shopping-cart.service';
 import { CartItemsComponent } from './components/cart-items/cart-items.component';
+import { ProductQuantityComponent } from './components/product-quantity/product-quantity.component';
 
 @NgModule({
   declarations: [
@@ -46,9 +47,10 @@ import { CartItemsComponent } from './components/cart-items/cart-items.component
     AdminOrdersComponent,
     LoginComponent,
     ProductFormComponent,
-    ProductsFilterComponent,
+    ProductFilterComponent,
     ProductCardComponent,
-    CartItemsComponent
+    CartItemsComponent,
+    ProductQuantityComponent
   ],
   imports: [
     BrowserModule,

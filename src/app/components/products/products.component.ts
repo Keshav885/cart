@@ -1,36 +1,52 @@
-import { Component, OnInit } from '@angular/core';
-import {ProductService} from '../../services/product.service';
-import {CategoryService} from '../../services/category.service';
-import {ActivatedRoute} from '@angular/router';
+import { ShoppingCart } from '../../models/shopping-cart';
+import { Observable } from 'rxjs/Observable';
+import { ShoppingCartService } from '../../services/shopping-cart.service';
 import { Product } from '../../models/product';
+import { ActivatedRoute } from '@angular/router';
+import { ProductService } from '../../services/product.service';
+import { Component, OnInit } from '@angular/core';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit  {
   products: Product[] = [];
-  filteredProducts: Product[]=[];
-  category;
+  filteredProducts: Product[] = [];
+  category: string;
+  cart$: Observable<ShoppingCart>;
 
   constructor(
-    route: ActivatedRoute,
-    private productService: ProductService) {
+    private route: ActivatedRoute,
+    private productService: ProductService,
+    private shoppingCartService: ShoppingCartService
+  ) {
+  }
 
-    productService.getAll().subscribe( products => {
-      this.products= products;
+  async ngOnInit() {
+    this.cart$ = await this.shoppingCartService.getCart();
+    this.populateProducts();
+  }
 
-      route.queryParamMap.subscribe(params => {
+  private populateProducts() {
+    this.productService
+      .getAll()
+      .switchMap(products => {
+        this.products = products;
+        return this.route.queryParamMap;
+      })
+      .subscribe(params => {
         this.category = params.get('category');
-        this.filteredProducts = (this.category) ?
-          this.products.filter( p => p.category === this.category) : this.products;
+        this.applyFilter();
       });
-    });
-
   }
 
-  ngOnInit() {
-  }
 
+  private applyFilter() {
+    this.filteredProducts = (this.category) ?
+    this.products.filter(p => p.category === this.category) :
+    this.products;
+  }
 }
